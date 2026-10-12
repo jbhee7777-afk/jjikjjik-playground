@@ -1,0 +1,24 @@
+{
+  "name": "찍찍이 컴퓨터 놀이터",
+  "short_name": "찍찍이 놀이터",
+  "description": "마우스·키보드·한글 자판을 놀면서 배워요.",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#25805E",
+  "theme_color": "#25805E",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "img/mascot.jpg",
+      "sizes": "200x200",
+      "type": "image/jpeg"
+    }
+  ]
+}
