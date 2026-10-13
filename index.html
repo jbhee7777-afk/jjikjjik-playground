@@ -348,6 +348,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;l
 .discover{position:absolute;left:50%;top:42%;z-index:5;background:#fff;border:4px solid var(--ink);border-radius:24px;padding:12px 26px;text-align:center;pointer-events:none;animation:discover 1.9s ease forwards;box-shadow:0 8px 0 rgba(0,0,0,.15)}
 .discover i{display:block;font-style:normal;font-family:var(--emoji);font-size:64px;line-height:1.1}
 .discover b{font-family:var(--display);font-weight:400;font-size:28px}
+.discover em{display:block;font-style:normal;font-size:14px;color:var(--ink2)}
 .discover small{display:block;font-family:var(--display);font-size:17px;color:var(--stamp)}
 @keyframes discover{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-62%) scale(1)}}
 /* ---------- mixed mouse games ---------- */
@@ -583,7 +584,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;l
       <h2>선생님께</h2>
       <ul>
         <li><b>1 클릭 → 2 휠·끌기 → 3 키보드 → 4 한글</b> 순서로 하면 자연스럽게 이어져요. 놀이마다 <b>1·2·3단계</b>가 있고, 앞 단계를 깨야 다음 단계가 열려요.</li>
-        <li><b>무엇이든 만들기</b>는 진짜 물건 211가지와 끝없는 발명품을 만들 수 있고, 만든 재료가 계속 남아요.</li>
+        <li><b>무엇이든 만들기</b>는 어떤 두 가지를 합쳐도 실제 물건·물질이 나와요(모두 585가지). 찾은 재료는 다음 시간에도 남아요.</li>
         <li>놀이를 하면 <b>치즈</b>를 받고, 치즈 20개로 스티커를 뽑아요. 스티커는 모두 48가지(일반·반짝·전설)예요.</li>
         <li>한글 놀이는 키의 <b>자리</b>를 읽어서 글자를 만들어요. 한/영 키가 영어로 되어 있어도 한글이 나와요.</li>
         <li>교실에서는 오른쪽 위 <b>소리</b> 버튼으로 효과음을 끌 수 있어요.</li>
@@ -1221,7 +1222,7 @@ const GAMES = [
 
 /* ---- 10. drag: infinite craft ---- */
 { id: 'craft', town: 'move', title: '무엇이든 만들기', skill: '끌어서 합치기', color: 'var(--orange)', r: -1.4, isNew: true,
-  desc: '물·불·흙·바람에서 시작해서 합치고 또 합쳐요. 끝없이 새로운 것이 나와요!',
+  desc: '물·불·흙·바람에서 시작해서 합치고 또 합쳐요. 무엇을 합쳐도 진짜 물건이 나와요. 모두 585가지!',
   how: ['오른쪽 재료를 <b>꾹</b> 눌러 작업대로 끌어 와요.', '하나를 다른 것 위에 <b>겹쳐 놓으면</b> 새로운 것이 생겨요. 만든 것끼리 또 합칠 수 있어요!', '작업대의 물건을 <b>더블클릭</b>하면 하나 더 생기고, <b>오른쪽 클릭</b>하면 치워요.'],
   run(c) { craftGame(c); } },
 
@@ -1719,6 +1720,8 @@ function journey(c, kind) {
 }
 
 /* ================= infinite craft ================= */
+/* Every pair makes a real thing: an exact recipe if there is one, otherwise a real item
+   from the list for the two ingredients' kinds (nature + food → fruit, animal + vehicle → horse…). */
 const CRAFT_TXT = `물+물=호수 🏞️
 불+불=태양 ☀️
 흙+흙=산 ⛰️
@@ -1929,40 +1932,201 @@ const CRAFT_TXT = `물+물=호수 🏞️
 사람+물=수영 🏊
 가족+집=우리 집 🏡
 학교+사람=친구 👫
-금+물컵=트로피 🏆`;
+금+물컵=트로피 🏆
+물+태양=무지개 🌈
+물+산=폭포 💦
+물+회오리=태풍 🌀
+물+김=안개 🌁
+물+파도=바다 🌊
+물+연기=안개 🌁
+물+먼지=진흙 🟫
+불+호수=김 ♨️
+불+산=화산 🌋
+불+파도=김 ♨️
+불+용암=화산 🌋
+불+먼지=연기 💨
+불+숲=산불 🔥
+흙+호수=섬 🏝️
+흙+태양=사막 🏜️
+흙+산=산맥 🏔️
+흙+회오리=먼지 🌫️
+흙+김=진흙 🟫
+흙+파도=모래 🏖️
+흙+용암=돌 🗿
+흙+먼지=모래 🏖️
+바람+호수=파도 🏄
+바람+산=메아리 🗣️
+바람+파도=태풍 🌀
+바람+연기=구름 ☁️
+바람+먼지=모래 폭풍 🏜️
+호수+호수=바다 🌊
+호수+산=폭포 💦
+호수+태양=김 ♨️
+태양+태양=사막 🏜️
+태양+산=해돋이 🌅
+태양+파도=해수욕장 🏖️
+태양+연기=노을 🌇
+태양+바다=노을 🌇
+산+파도=섬 🏝️
+산+연기=화산 🌋
+회오리+회오리=태풍 🌀
+진흙+진흙=그릇 🥣
+진흙+파도=모래 🏖️
+파도+파도=바다 🌊
+용암+용암=화산 🌋
+연기+연기=구름 ☁️
+먼지+먼지=모래 🏖️
+바다+바다=바닷물 🌊
+비+비=소나기 🌦️
+비+바람=태풍 🌀
+눈+바람=눈보라 🌨️
+얼음+얼음=빙하 🏔️
+번개+번개=전기 🔌`;
+const CRAFT_CATS = `N: 물, 불, 흙, 바람, 호수, 회오리, 김, 파도, 연기, 먼지, 바다, 화산, 구름, 비, 무지개, 번개, 눈, 얼음, 산, 산맥, 섬, 사막, 생명, 거품, 산불, 메아리, 모래 폭풍, 눈보라
+M: 진흙, 용암, 돌, 숯, 쇠, 벽돌, 모래, 유리, 종이, 실, 천, 금, 보석
+P: 식물, 나무, 꽃, 밀, 숲, 야자수
+A: 물고기, 새, 벌레, 동물, 상어, 고래, 병아리, 닭, 벌, 강아지, 호랑이, 낙타, 펭귄, 소, 양, 공룡, 용, 유니콘, 생쥐, 찍찍이
+H: 사람, 가족, 사랑, 산타, 왕, 가수, 유령, 마법사, 잠, 꿈, 우주비행사, 친구
+F: 쌀, 알, 달걀프라이, 꿀, 사탕, 막대사탕, 우유, 치즈, 아이스크림, 차, 라면, 밥, 김밥, 빵, 피자, 햄버거, 도넛, 케이크, 사과, 파이, 옥수수, 팝콘
+T: 그릇, 모래시계, 망치, 도구, 가위, 의자, 소파, 바퀴, 상자, 공책, 연필, 일기장, 책, 글자, 자, 크레파스, 물감, 편지, 옷장, 우산, 이불, 침대, 텐트, 돈, 물컵, 냄비, 숟가락, 포크, 젓가락, 비누, 약, 망원경, 현미경, 나침반
+V: 자전거, 자동차, 킥보드, 버스, 기차, 비행기, 로켓, 소방차, 배, 큰 배, 비행접시
+B: 집, 마을, 도시, 나라, 길, 도서관, 학교, 성, 병원, 신호등, 다리, 대관람차, 롤러코스터, 놀이공원, 가게, 문방구, 우리 집
+S: 태양, 하늘, 지구, 우주, 행성, 별, 달, 별자리, 별똥별, 화성, 외계인
+E: 전기, 전구, 컴퓨터, 텔레비전, 전화기, 스마트폰, 키보드, 마우스, 로봇, 시계, 카메라, 게임
+C: 안경, 옷, 신발, 양말, 모자, 장갑, 가방, 왕관, 반지, 손목시계
+J: 눈사람, 종이비행기, 종이배, 그림, 퍼즐, 주사위, 곰 인형, 캠핑, 풍선, 축구공, 선물, 크리스마스트리, 메달, 소리, 기타, 트럼펫, 노래, 피아노, 북, 생일 파티, 수영, 트로피`;
+const CRAFT_POOLS = `NN>N: 폭포 💦, 태풍 🌀, 안개 🌁, 우박 🌨️, 온천 ♨️, 빙하 🏔️, 소나기 🌦️, 바닷물 🌊
+NM>M: 소금 🧂/F, 석탄 ⚫, 화석 🦴, 동굴 🕳️/B, 구리 🥉, 수정 💠
+NP>P: 버섯 🍄, 선인장 🌵, 해바라기 🌻, 단풍잎 🍁, 도토리 🌰, 네잎클로버 🍀, 새싹 🌱
+NA>A: 개구리 🐸, 달팽이 🐌, 오리 🦆, 악어 🐊, 문어 🐙, 거북이 🐢, 곰 🐻, 해파리 🎐
+NH>H: 농부 👨‍🌾, 낚시꾼 🎣, 스키 선수 ⛷️, 소풍 🧺/J, 서퍼 🏄
+NF>F: 수박 🍉, 포도 🍇, 귤 🍊, 딸기 🍓, 바나나 🍌, 레몬 🍋, 복숭아 🍑
+NT>T: 온도계 🌡️, 양초 🕯️, 돋보기 🔎, 물병 🍶, 성냥 🔥
+NV>V: 헬리콥터 🚁, 쾌속정 🚤, 케이블카 🚠, 열기구 🎈, 모터보트 🛥️, 썰매 🛷
+NB>B: 분수 ⛲, 해수욕장 🏖️, 스키장 🎿, 정원 🌷, 공원 🏞️
+NS>S: 노을 🌇, 해돋이 🌅, 밤하늘 🌃, 초승달 🌙, 은하수 🌌
+NE>E: 발전소 🏭, 정수기 🚰, 라디오 📻, 배터리 🔋, 레이더 📡
+NC>C: 비옷 🧥, 장화 👢, 선글라스 🕶️, 목도리 🧣, 수영복 👙
+NJ>J: 썰매 🛷/V, 스키 🎿, 물놀이 🤽, 서핑 🏄, 모래성 🏰
+MM>M: 자석 🧲, 쇠사슬 ⛓️, 플라스틱 🧴, 콘크리트 🏗️, 나사 🔩
+MP>T: 바구니 🧺, 꽃병 🏺, 빗자루 🧹, 나무 상자 📦, 밧줄 ➰
+MA>A: 조개 🐚, 뼈다귀 🦴/T, 고슴도치 🦔, 소라게 🦀, 아르마딜로 🛡️
+MH>H: 조각상 🗽/B, 방패 🛡️/T, 대장장이 ⚒️, 도자기 🏺/T, 기사 🏇
+MF>T: 접시 🍽️, 도시락 🍱/F, 통조림 🥫/F, 프라이팬 🍳, 주전자 ☕
+MT>T: 열쇠 🔑, 자물쇠 🔒, 클립 📎, 압정 📌, 나침반 🧭
+MV>V: 닻 ⚓/T, 기찻길 🛤️/B, 트럭 🚚, 트랙터 🚜, 지게차 🏗️
+MB>B: 탑 🗼, 공사장 🏗️, 헛간 🏚️, 울타리 🚧, 등대 🗼
+MS>S: 운석 ☄️, 인공위성 🛰️, 우주정거장 🛰️, 혜성 ☄️
+ME>E: 배터리 🔋, 계산기 🧮, 저장 장치 💾, 시디 💿, 마이크 🎙️
+MC>C: 단추 🔘, 리본 🎀, 목걸이 📿, 지갑 👛, 핸드백 👜
+MJ>J: 볼링 🎳, 다트 🎯, 농구공 🏀, 구슬 🔮, 블록 🧱
+PP>P: 꽃다발 💐, 장미 🌹, 튤립 🌷, 벚꽃 🌸, 허브 🌿, 대나무 🎋
+PA>A: 판다 🐼, 코알라 🐨, 원숭이 🐒, 나비 🦋, 토끼 🐰, 다람쥐 🐿️, 애벌레 🐛
+PH>H: 정원사 👩‍🌾, 꽃꽂이 💐/J, 약초 🌿/P, 나무꾼 🪓
+PF>F: 샐러드 🥗, 감자 🥔, 당근 🥕, 토마토 🍅, 브로콜리 🥦, 고추 🌶️, 오이 🥒
+PT>T: 빗자루 🧹, 바구니 🧺, 풍경 🎐, 나무 숟가락 🥄, 화분 🌱
+PV>V: 카누 🛶, 트랙터 🚜, 뗏목 🛶, 마차 🐎
+PB>B: 농장 🚜, 온실 🏡, 식물원 🏞️, 꽃집 💐, 과수원 🍎
+PS>S: 해바라기 🌻/P, 나팔꽃 🌺/P, 달맞이꽃 🌼/P
+PE>E: 프린터 🖨️, 전자책 📖, 공기청정기 🌬️
+PC>C: 밀짚모자 👒, 꽃목걸이 🌺, 꽃무늬 원피스 👗
+PJ>J: 숨바꼭질 🙈, 나뭇잎 배 🍃, 꽃반지 💍, 나무 타기 🌳
+AA>A: 사자 🦁, 기린 🦒, 코끼리 🐘, 얼룩말 🦓, 캥거루 🦘, 여우 🦊, 늑대 🐺, 하마 🦛
+AH>H: 카우보이 🤠, 수의사 👨‍⚕️, 반려견 🐕/A, 조련사 🎪
+AF>F: 치킨 🍗, 초밥 🍣, 새우튀김 🍤, 핫도그 🌭, 꿀떡 🍡
+AT>T: 낚싯대 🎣, 깃털 펜 🖋️, 붓 🖌️, 뼈다귀 🦴
+AV>V: 말 🐎/A, 경주마 🏇, 썰매 🛷, 마차 🐎
+AB>B: 동물원 🦒, 수족관 🐠, 외양간 🐄, 개집 🐶
+AS>S: 사자자리 ♌, 게자리 ♋, 물고기자리 ♓, 양자리 ♈
+AE>E: 로봇 강아지 🐕, 영상 통화 📹, 디지털 카메라 📸
+AC>C: 털목도리 🧣, 가죽 구두 👞, 털장갑 🧤
+AJ>J: 서커스 🎪, 공 던지기 🎾, 낚시 놀이 🎣
+HH>H: 아기 👶, 할머니 👵, 할아버지 👴, 경찰관 👮, 요리사 👨‍🍳, 쌍둥이 👯, 소방관 👨‍🚒
+HF>F: 생일 케이크 🎂, 식당 🍽️/B, 파티 🥳/J, 요리사 👨‍🍳/H
+HT>H: 화가 👩‍🎨, 탐정 🕵️, 우체부 📮, 기자 📰
+HV>V: 택시 🚕, 경찰차 🚓, 구급차 🚑, 조종사 👨‍✈️/H
+HB>B: 회사 🏢, 우체국 🏤, 은행 🏦, 호텔 🏨, 경찰서 👮
+HS>H: 천문학자 🔭, 소원 🌠, 별 보기 ✨/J
+HE>H: 프로그래머 👩‍💻, 유튜버 📹, 사진사 📸
+HC>J: 패션쇼 👗, 결혼식 💒, 마술사 🎩/H, 미용실 💇/B
+HJ>J: 춤 💃, 운동회 🏃, 응원 📣, 마라톤 🏅
+FF>F: 만두 🥟, 카레 🍛, 샌드위치 🥪, 떡꼬치 🍡, 팬케이크 🥞, 와플 🧇, 컵케이크 🧁
+FT>T: 도시락 🍱/F, 접시 🍽️, 병 🍾, 국자 🥄
+FV>V: 푸드트럭 🚚, 배달 오토바이 🛵
+FB>B: 빵집 🥐, 카페 ☕, 시장 🛒, 아이스크림 가게 🍨
+FS>F: 송편 🥟, 우주 식량 🥫, 별사탕 🍬
+FE>E: 냉장고 🧊, 밥솥 🍚, 자판기 🏧
+FC>C: 앞치마 🎽, 사탕 목걸이 📿
+FJ>J: 영화관 🎬/B, 소풍 🧺, 핼러윈 🎃
+TT>T: 볼펜 🖊️, 필통 👝, 서랍 🗃️, 쓰레기통 🗑️, 달력 📅, 지도 🗺️, 클립보드 📋
+TV>T: 스패너 🔧, 주유소 ⛽/B, 경적 📯
+TB>B: 교실 🏫, 사무실 💼, 우체통 📮/T
+TS>T: 지구본 🌐, 해시계 🕰️, 별자리 지도 🗺️
+TE>E: 스톱워치 ⏱️, 확성기 📢, 프린터 🖨️
+TC>C: 넥타이 👔, 핸드백 👜, 지갑 👛
+TJ>J: 체스 ♟️, 카드놀이 🃏, 볼링 🎳
+VV>V: 지하철 🚇, 트럭 🚚, 공항 🛫/B, 기차역 🚉/B, 버스 정류장 🚏/B, 경주용 자동차 🏎️
+VB>B: 주차장 🅿️, 항구 ⚓, 세차장 🚿
+VS>V: 인공위성 🛰️/S, 우주정거장 🛰️/S, 달 탐사선 🛸
+VE>V: 전기차 🚘, 고속열차 🚄, 모노레일 🚝
+VC>C: 헬멧 ⛑️, 구명조끼 🦺
+VJ>J: 회전목마 🎠, 범퍼카 🚙, 장난감 기차 🚂
+BB>B: 아파트 🏢, 궁궐 🏯, 경기장 🏟️, 박물관 🏛️
+BS>B: 천문대 🔭, 우주센터 🚀, 전망대 🗼
+BE>B: 방송국 📺, 공장 🏭, 영화관 🎬
+BC>B: 옷가게 👗, 세탁소 🧺, 신발 가게 👠
+BJ>B: 놀이터 🎠, 수영장 🏊, 공연장 🎭
+SS>S: 은하수 🌌, 블랙홀 🕳️, 태양계 ☀️, 혜성 ☄️
+SE>E: 위성 안테나 📡, 우주 망원경 🔭, 내비게이션 🗺️
+SC>C: 우주복 👨‍🚀, 반짝이 옷 ✨
+SJ>J: 불꽃놀이 🎆, 폭죽 🎇, 소원 🌠/H
+EE>E: 슈퍼컴퓨터 🖥️, 인터넷 🌐, 노트북 💻, 이어폰 🎧, 조이스틱 🕹️
+EC>C: 헤드폰 🎧, VR 안경 🥽, 스마트워치 ⌚
+EJ>J: 게임기 🕹️, 노래방 🎤, 무선 자동차 🏎️
+CC>C: 드레스 👗, 정장 🤵, 하이힐 👠, 부츠 👢, 티셔츠 👕
+CJ>J: 가면 🎭, 슈퍼히어로 🦸, 발레 🩰
+JJ>J: 오케스트라 🎻, 바이올린 🎻, 축제 🎊, 콘서트 🎶, 보드게임 🎲`;
+const CORDER = 'NMPAHFTVBSECJ';
+const CNAME = { N: '자연', M: '재료', P: '식물', A: '동물', H: '사람', F: '음식', T: '물건', V: '탈것', B: '장소', S: '우주', E: '전자', C: '옷', J: '놀이' };
 const CR = (() => {
-  const R = {}, E = { '물': '💧', '불': '🔥', '흙': '🟤', '바람': '🌬️' };
+  const R = {}, E = { '물': '💧', '불': '🔥', '흙': '🟤', '바람': '🌬️' }, CAT = {}, POOL = {};
   CRAFT_TXT.trim().split('\n').forEach(l => { const m = l.trim().match(/^(.+?)\+(.+?)=(.+) (\S+)$/); if (!m) return; R[[m[1], m[2]].sort().join('+')] = m[3]; E[m[3]] = m[4]; });
-  return { R, E, LIST: Object.entries(R).map(([k, v]) => [...k.split('+'), v]) };
+  CRAFT_CATS.trim().split('\n').forEach(l => { const [c, r] = l.trim().split(': '); r.split(', ').forEach(n => CAT[n] = c); });
+  CRAFT_POOLS.trim().split('\n').forEach(l => {
+    const m = l.trim().match(/^(\w\w)>(\w): (.+)$/); if (!m) return;
+    const key = [...m[1]].sort((a, b) => CORDER.indexOf(a) - CORDER.indexOf(b)).join('');
+    POOL[key] = m[3].split(', ').map(s => { const t = s.trim().match(/^(.+) (\S+?)(?:\/(\w))?$/); if (!E[t[1]]) E[t[1]] = t[2]; if (!CAT[t[1]]) CAT[t[1]] = t[3] || m[2]; return t[1]; });
+  });
+  return { R, E, CAT, POOL, LIST: Object.entries(R).map(([k, v]) => [...k.split('+'), v]) };
 })();
 const CBASE = ['물', '불', '흙', '바람'];
 const CMISSIONS = ['무지개', '집', '연필', '우산', '로봇', '로켓', '컴퓨터', '김밥', '유니콘', '공룡', '왕관', '찍찍이'];
+const chash = s => { let h = 7; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; };
 function craftGame(c) {
   const CD = DATA.craft || (DATA.craft = { known: [], missions: {} });
-  if (!CD.known.length) CBASE.forEach(n => CD.known.push({ n, e: [CR.E[n]] }));
-  const get = n => CD.known.find(k => k.n === n);
-  const emOf = n => { const k = get(n); return k ? k.e[k.e.length - 1] : CR.E[n] || '❔'; };
-  const REAL = Object.keys(CR.E).length;
-  let newReal = 0, newInv = 0, invCheese = 0, tab = 'all', abc = false;
+  CD.known = CD.known.filter(k => !k.inv && CR.E[k.n]);                 // drop the old made-up names
+  CBASE.forEach(n => { if (!CD.known.some(k => k.n === n)) CD.known.unshift({ n }); });
+  const known = () => new Set(CD.known.map(k => k.n));
+  const TOTAL = Object.keys(CR.E).length;
+  let found = 0, tab = 'all', abc = false;
   const say = sayBox('재료 두 개를 <b>겹쳐</b> 보세요. 물과 불을 합치면 뭐가 될까요?');
   const tools = el('div', 'ctools', `<button type="button" class="cbtn" data-a="hint">💡 힌트 보기</button><button type="button" class="cbtn" data-a="clear">🧹 작업대 치우기</button><button type="button" class="cbtn" data-a="end">⭐ 오늘 탐험 끝내기</button>`);
   const craft = el('div', 'craft'), ws = el('div', 'ws', '<div class="tip">끌어서 겹치기 · 더블클릭하면 하나 더 · 오른쪽 클릭하면 치우기</div>');
   const side = el('div', 'shelf'), mis = el('div', 'missions'), tabs = el('div', 'ctabs'), list = el('div', 'list');
   side.append(el('h3', '', '도전! 만들어 볼까?'), mis, el('h3', '', '내 재료'), tabs, list);
   craft.append(ws, side); c.body.append(say, tools, craft);
-  const counts = () => { const inv = CD.known.filter(k => k.inv).length; return [CD.known.length - inv, inv]; };
-  const hud = () => { const [r, i] = counts(); c.hud(chip('🧪', `진짜 물건 ${r} / ${REAL}`) + chip('💡', `발명품 ${i}`) + chip('✨', `오늘 ${newReal + newInv}개`)); };
-  const renderMissions = () => {
-    mis.innerHTML = CMISSIONS.map(n => CD.missions[n] ? `<span class="ms done">${CR.E[n]} ${n}</span>` : `<button type="button" class="ms" data-n="${n}">❓ ${n}</button>`).join('');
+  const hud = () => c.hud(chip('🧪', `찾은 것 ${CD.known.length} / ${TOTAL}`) + chip('✨', `오늘 ${found}개`));
+  const renderMissions = () => { mis.innerHTML = CMISSIONS.map(n => CD.missions[n] ? `<span class="ms done">${CR.E[n]} ${n}</span>` : `<button type="button" class="ms" data-n="${n}">❓ ${n}</button>`).join(''); };
+  const renderTabs = () => {
+    const have = new Set(CD.known.map(k => CR.CAT[k.n]));
+    tabs.innerHTML = `<button type="button" class="ctab${tab === 'all' ? ' on' : ''}" data-t="all">전체</button>` + [...CORDER].filter(k => have.has(k)).map(k => `<button type="button" class="ctab${tab === k ? ' on' : ''}" data-t="${k}">${CNAME[k]}</button>`).join('') + `<button type="button" class="ctab" data-t="sort">${abc ? '가나다순' : '새로운 순'}</button>`;
   };
-  const renderTabs = () => { tabs.innerHTML = [['all', '전체'], ['real', '진짜 물건'], ['inv', '발명품']].map(([k, l]) => `<button type="button" class="ctab${tab === k ? ' on' : ''}" data-t="${k}">${l}</button>`).join('') + `<button type="button" class="ctab" data-t="sort">${abc ? '가나다순' : '만든 순'}</button>`; };
-  const mk = k => { const d = el('div', 'elem' + (k.inv ? ' inv' : ''), `<i>${k.e.join('')}</i>${k.n}`); d.dataset.n = k.n; return d; };
+  const mk = n => { const d = el('div', 'elem', `<i>${CR.E[n]}</i>${n}`); d.dataset.n = n; return d; };
   const renderShelf = () => {
-    let ks = CD.known.filter(k => tab === 'all' || (tab === 'inv' ? k.inv : !k.inv));
-    if (abc) ks = ks.slice().sort((a, b) => a.n.localeCompare(b.n, 'ko')); else ks = ks.slice().reverse();
+    let ns = CD.known.map(k => k.n).filter(n => tab === 'all' || CR.CAT[n] === tab);
+    ns = abc ? ns.sort((a, b) => a.localeCompare(b, 'ko')) : ns.reverse();
     list.innerHTML = '';
-    ks.forEach(k => { const d = mk(k); d.addEventListener('pointerdown', ev => { if (ev.button !== 0) return; drag(mk(k), ev, 30, 18, true); }); list.append(d); });
-    if (!ks.length) list.innerHTML = '<p style="font-size:14px;color:var(--ink2)">아직 없어요. 합쳐 봐요!</p>';
+    ns.forEach(n => { const d = mk(n); d.addEventListener('pointerdown', ev => { if (ev.button !== 0) return; drag(mk(n), ev, 30, 18, true); }); list.append(d); });
     hud();
   };
   const center = d => { const r = d.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
@@ -1972,56 +2136,40 @@ function craftGame(c) {
     d.onpointerdown = ev => { if (ev.button !== 0) return; const r = d.getBoundingClientRect(); drag(d, ev, ev.clientX - r.left, ev.clientY - r.top, false); };
     d.oncontextmenu = ev => { ev.preventDefault(); d.remove(); sfx.tick(); };
   };
-  const pop = (k, kind) => {
-    ws.querySelector('.discover')?.remove();
-    const b = el('div', 'discover', `<small>${kind}</small><i>${k.e.join('')}</i><b>${k.n}</b>`); ws.append(b); setTimeout(() => b.remove(), 1900);
-  };
-  const invent = (a, b) => {
-    if (a === b) {
-      const P = ['왕', '슈퍼', '우주 최강'], pi = P.findIndex(p => b.startsWith(p + ' '));
-      if (pi < 0) return '왕 ' + b; if (pi < P.length - 1) return P[pi + 1] + ' ' + b.slice(P[pi].length + 1); return b.slice(P[pi].length + 1) + ' 탑';
-    }
-    const wa = a.replace(/^(왕|슈퍼|우주 최강) /, '').split(' '); let mod = wa[wa.length - 1];
-    let tw = b.split(' '); if (tw.length >= 3) tw = tw.slice(-2);
-    if (tw.includes(mod)) mod = wa[0];
-    if (tw.includes(mod)) return '반짝 ' + tw.join(' ');
-    return mod + ' ' + tw.join(' ');
+  const pop = n => { ws.querySelector('.discover')?.remove(); const b = el('div', 'discover', `<small>처음 발견!</small><i>${CR.E[n]}</i><b>${n}</b><em>${CNAME[CR.CAT[n]] || ''}</em>`); ws.append(b); setTimeout(() => b.remove(), 1900); };
+  const result = (a, b) => {
+    const r = CR.R[[a, b].sort().join('+')]; if (r) return [r, true];
+    const key = [CR.CAT[a], CR.CAT[b]].sort((x, y) => CORDER.indexOf(x) - CORDER.indexOf(y)).join('');
+    const pool = (CR.POOL[key] || []).filter(n => n !== a && n !== b); if (!pool.length) return [b, false];
+    const kn = known(), start = chash([a, b].sort().join('+')) % pool.length;
+    for (let i = 0; i < pool.length; i++) { const n = pool[(start + i) % pool.length]; if (!kn.has(n)) return [n, false]; }
+    return [pool[start], false];
   };
   function combine(d, o) {
-    const a = d.dataset.n, b = o.dataset.n; let n = CR.R[[a, b].sort().join('+')], inv = false, e;
-    if (n) e = [CR.E[n]]; else { inv = true; n = invent(a, b); e = a === b ? [emOf(b)] : [emOf(a), emOf(b)]; if (e[0] === e[1]) e = [e[0]]; }
+    const a = d.dataset.n, b = o.dataset.n, [n, exact] = result(a, b);
     const ol = parseFloat(o.style.left), ot = parseFloat(o.style.top); d.remove(); o.remove();
-    let k = get(n); const isNew = !k;
-    if (isNew) { k = { n, e, inv: inv ? 1 : 0 }; CD.known.push(k); if (inv) { const invs = CD.known.filter(x => x.inv); if (invs.length > 400) CD.known.splice(CD.known.indexOf(invs[0]), 1); } }
-    const nd = mk(k); nd.classList.add('born'); const wr = ws.getBoundingClientRect(); place(nd, wr.left + ol, wr.top + ot);
-    if (!isNew) { sfx.ok(); say.set(`${k.e.join('')} <b>${k.n}</b>! 전에 만든 거예요. 다른 것과도 합쳐 봐요.`); return; }
-    if (!inv) {
-      newReal++; sfx.win(); addCheese(2, nd); pop(k, '처음 발견!');
-      say.set(`처음 발견! ${k.e.join('')} <b>${eul(n)}</b> 만들었어요. 🧀 +2`);
-      if (CMISSIONS.includes(n) && !CD.missions[n]) { CD.missions[n] = 1; setTimeout(() => { addCheese(5, nd); toast(`도전 성공! ${CR.E[n]} ${n} 🧀 +5`); sfx.fanfare(); }, 900); renderMissions(); }
-    } else {
-      newInv++; sfx.pop(); pop(k, '새 발명품!');
-      if (invCheese < 10) { invCheese++; addCheese(1, nd); }
-      say.set(`짜잔! 세상에 없던 ${k.e.join('')} <b>${eul(n)}</b> 발명했어요!`);
-    }
-    persist(); renderShelf();
+    const isNew = !known().has(n); if (isNew) CD.known.push({ n });
+    const nd = mk(n); nd.classList.add('born'); const wr = ws.getBoundingClientRect(); place(nd, wr.left + ol, wr.top + ot);
+    if (!isNew) { sfx.ok(); say.set(`${CR.E[a]}${a} + ${CR.E[b]}${b} = ${CR.E[n]} <b>${n}</b>! 이미 찾은 거예요. 다른 것과 합쳐 봐요.`); return; }
+    found++; sfx.win(); pop(n); addCheese(exact ? 2 : 1, nd);
+    say.set(`${CR.E[a]}${a} + ${CR.E[b]}${b} = ${CR.E[n]} <b>${n}</b>! 처음 발견했어요.`);
+    if (CMISSIONS.includes(n) && !CD.missions[n]) { CD.missions[n] = 1; setTimeout(() => { addCheese(5, nd); toast(`도전 성공! ${CR.E[n]} ${n} 🧀 +5`); sfx.fanfare(); }, 900); renderMissions(); }
+    persist(); renderTabs(); renderShelf();
   }
   function drag(d, e, ox, oy, fromShelf) {
     if (!c.alive) return; e.preventDefault(); const sx = e.clientX, sy = e.clientY;
-    const wsHome = !fromShelf ? [parseFloat(d.style.left), parseFloat(d.style.top)] : null;
+    const home = !fromShelf ? [parseFloat(d.style.left), parseFloat(d.style.top)] : null;
     d.classList.add('flying'); document.body.append(d);
     const mv = ev => { d.style.left = (ev.clientX - ox) + 'px'; d.style.top = (ev.clientY - oy) + 'px'; }; mv(e);
     const up = ev => {
       window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up);
       if (!c.alive) { d.remove(); return; }
       const wr = ws.getBoundingClientRect(), moved = Math.hypot(ev.clientX - sx, ev.clientY - sy);
-      if (ev.clientX < wr.left || ev.clientX > wr.right || ev.clientY < wr.top || ev.clientY > wr.bottom) {
-        if (fromShelf || moved > 6) { d.remove(); return; }
-      }
+      if (ev.clientX < wr.left || ev.clientX > wr.right || ev.clientY < wr.top || ev.clientY > wr.bottom) { if (fromShelf || moved > 6) { d.remove(); return; } }
       place(d, ev.clientX - ox, ev.clientY - oy);
       if (!fromShelf && moved < 6) {           // a click, not a drag: double click makes a copy
         const now = performance.now();
-        if (d._last && now - d._last < 420) { d._last = 0; const k = get(d.dataset.n); if (k) { const cp = mk(k); cp.classList.add('born'); place(cp, wr.left + wsHome[0] + 24, wr.top + wsHome[1] + 30); sfx.pop(); } }
+        if (d._last && now - d._last < 420) { d._last = 0; const cp = mk(d.dataset.n); cp.classList.add('born'); place(cp, wr.left + home[0] + 24, wr.top + home[1] + 30); sfx.pop(); }
         else d._last = now;
         return;
       }
@@ -2032,31 +2180,30 @@ function craftGame(c) {
     };
     window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
   }
-  const hint = (target) => {
-    const known = new Set(CD.known.map(k => k.n));
+  const hint = target => {
+    const kn = known();
     if (target) {
       const r = CR.LIST.find(x => x[2] === target); if (!r) return;
-      const show = n => known.has(n) ? `${CR.E[n]} <b>${n}</b>` : `<b>❓ ???</b>`;
-      say.set(`${target} 만드는 법: ${show(r[0])} + ${show(r[1])}${known.has(r[0]) && known.has(r[1]) ? ' 을 합쳐 봐요!' : ' (❓도 먼저 만들어야 해요)'}`); return;
+      const show = n => kn.has(n) ? `${CR.E[n]} <b>${n}</b>` : '<b>❓ ???</b>';
+      say.set(`${target} 만드는 법: ${show(r[0])} + ${show(r[1])}${kn.has(r[0]) && kn.has(r[1]) ? ' 합쳐 봐요!' : ' (❓부터 먼저 만들어요)'}`); return;
     }
-    const cand = CR.LIST.filter(([a, b, n]) => known.has(a) && known.has(b) && !known.has(n));
-    if (!cand.length) { say.set('진짜 물건을 모두 찾았어요! 이제 마음껏 <b>발명품</b>을 만들어 봐요.'); return; }
-    const [a, b] = pick(cand); say.set(`힌트: ${CR.E[a]} <b>${a}</b> + ${CR.E[b]} <b>${b}</b> 을 합치면 새로운 게 나와요!`);
+    const cand = CR.LIST.filter(([a, b, n]) => kn.has(a) && kn.has(b) && !kn.has(n));
+    if (!cand.length) { say.set('정해진 조합은 다 찾았어요! 아무거나 합쳐도 새로운 게 나와요.'); return; }
+    const [a, b] = pick(cand); say.set(`힌트: ${CR.E[a]} <b>${a}</b> + ${CR.E[b]} <b>${b}</b> 합쳐 봐요!`);
   };
   tools.addEventListener('click', e => {
     const b = e.target.closest('.cbtn'); if (!b || !c.alive) return; b.blur();
     if (b.dataset.a === 'hint') { hint(); sfx.tick(); }
     if (b.dataset.a === 'clear') { ws.querySelectorAll('.elem').forEach(x => x.remove()); sfx.tick(); }
     if (b.dataset.a === 'end') {
-      const n = newReal + newInv;
-      if (n < 3) { say.set(`새로운 걸 <b>3개</b> 이상 만들면 별을 받을 수 있어요. (지금 ${n}개)`); sfx.bad(); return; }
-      c.done(n >= 15 ? 3 : n >= 7 ? 2 : 1, `오늘 진짜 물건 ${newReal}개, 발명품 ${newInv}개를 새로 만들었어요! 다음에 와도 재료가 그대로 남아 있어요.`);
+      if (found < 3) { say.set(`새로운 걸 <b>3개</b> 이상 찾으면 별을 받을 수 있어요. (지금 ${found}개)`); sfx.bad(); return; }
+      c.done(found >= 15 ? 3 : found >= 7 ? 2 : 1, `오늘 새로운 것 ${found}개를 찾았어요! 지금까지 ${CD.known.length}가지를 모았어요. 다음에 와도 그대로 남아 있어요.`);
     }
   });
   mis.addEventListener('click', e => { const b = e.target.closest('.ms[data-n]'); if (b) hint(b.dataset.n); });
   tabs.addEventListener('click', e => { const b = e.target.closest('.ctab'); if (!b) return; if (b.dataset.t === 'sort') abc = !abc; else tab = b.dataset.t; renderTabs(); renderShelf(); });
-  renderMissions(); renderTabs(); renderShelf();
-  c.later(() => { const wr = ws.getBoundingClientRect(); CBASE.forEach((n, i) => place(mk(get(n)), wr.left + 30 + (i % 2) * 140, wr.top + 30 + Math.floor(i / 2) * 80)); }, 30);
+  persist(); renderMissions(); renderTabs(); renderShelf();
+  c.later(() => { const wr = ws.getBoundingClientRect(); CBASE.forEach((n, i) => place(mk(n), wr.left + 30 + (i % 2) * 140, wr.top + 30 + Math.floor(i / 2) * 80)); }, 30);
 }
 
 /* ================= shell ================= */
