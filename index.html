@@ -335,6 +335,21 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;l
 .cue.top{top:76px}.cue.bottom{bottom:20px}
 .chest{font-size:96px!important}
 
+.ctools{display:flex;gap:8px;flex-wrap:wrap}
+.cbtn{border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-family:var(--display);font-size:17px;cursor:pointer}
+.cbtn:hover{border-color:var(--ink)}
+.missions{display:flex;flex-wrap:wrap;gap:5px}
+.ms{font-size:13px;font-family:var(--display);padding:2px 9px;border-radius:999px;background:#fff;border:2px dashed #CFC4F3;cursor:pointer;white-space:nowrap}
+.ms.done{border:2px solid var(--ok);background:#E2F7E8;cursor:default}
+.ctabs{display:flex;gap:4px;flex-wrap:wrap}
+.ctab{flex:1 1 auto;border:0;border-radius:10px;padding:4px 6px;background:#E9E4F7;font-family:var(--display);font-size:14px;cursor:pointer;white-space:nowrap}
+.ctab.on{background:var(--ink);color:#fff}
+.elem.inv{border-style:dashed;border-color:#FFB36B;background:#FFFBF2}
+.discover{position:absolute;left:50%;top:42%;z-index:5;background:#fff;border:4px solid var(--ink);border-radius:24px;padding:12px 26px;text-align:center;pointer-events:none;animation:discover 1.9s ease forwards;box-shadow:0 8px 0 rgba(0,0,0,.15)}
+.discover i{display:block;font-style:normal;font-family:var(--emoji);font-size:64px;line-height:1.1}
+.discover b{font-family:var(--display);font-weight:400;font-size:28px}
+.discover small{display:block;font-family:var(--display);font-size:17px;color:var(--stamp)}
+@keyframes discover{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}80%{opacity:1;transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-62%) scale(1)}}
 /* ---------- mixed mouse games ---------- */
 .captcha{width:min(100%,540px);margin-inline:auto;background:#fff;border:2px solid #D9DCE6;border-radius:16px;box-shadow:0 6px 0 rgba(0,0,0,.08);overflow:hidden}
 .capHead{background:#4A8CF7;color:#fff;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -360,10 +375,10 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;l
 .terms{width:100%;height:200px;overflow-y:auto;border:2px solid #D9DCE6;border-radius:12px;padding:14px 16px;font-size:17px;overscroll-behavior:contain}
 .terms ol{margin:0 0 220px;padding-left:22px;display:grid;gap:10px}
 
-.craft{display:grid;grid-template-columns:minmax(0,1fr) 230px;gap:14px}
-.ws{position:relative;height:clamp(360px,56vh,540px);border-radius:18px;background:#FBFAFF radial-gradient(#DCD5F5 1.2px,transparent 1.4px) 0 0/22px 22px;border:3px solid #E6E1F7;overflow:hidden}
+.craft{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:14px}
+.ws{position:relative;height:clamp(400px,62vh,620px);border-radius:18px;background:#FBFAFF radial-gradient(#DCD5F5 1.2px,transparent 1.4px) 0 0/22px 22px;border:3px solid #E6E1F7;overflow:hidden}
 .ws .tip{position:absolute;inset:auto 0 12px 0;text-align:center;color:var(--ink2);font-size:15px;pointer-events:none}
-.shelf{background:#F4F1FF;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:8px;max-height:clamp(360px,56vh,540px);overflow:auto}
+.shelf{background:#F4F1FF;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:8px;max-height:clamp(400px,62vh,620px);overflow:auto}
 .shelf h3{font-size:20px}
 .shelf .list{display:flex;flex-wrap:wrap;gap:6px}
 .elem{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:#fff;border:2px solid #D9D0F7;border-radius:12px;font-family:var(--display);font-size:19px;cursor:grab;user-select:none;-webkit-user-select:none;touch-action:none;white-space:nowrap;box-shadow:0 2px 0 rgba(0,0,0,.06)}
@@ -513,8 +528,11 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;l
   .hero .mascot,.cue,.k.hl,.tre.sparkle,.caret,.rider,.deco,.gift.wander{animation:none}
   .card,.card .art img{transition:none}
 }
-@media (max-width:640px){
+@media (max-width:860px){
   .craft{grid-template-columns:1fr}
+  .shelf{max-height:300px}
+}
+@media (max-width:640px){
   .doll{width:100px}
 }
 </style>
@@ -565,6 +583,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0;l
       <h2>선생님께</h2>
       <ul>
         <li><b>1 클릭 → 2 휠·끌기 → 3 키보드 → 4 한글</b> 순서로 하면 자연스럽게 이어져요. 놀이마다 <b>1·2·3단계</b>가 있고, 앞 단계를 깨야 다음 단계가 열려요.</li>
+        <li><b>무엇이든 만들기</b>는 진짜 물건 211가지와 끝없는 발명품을 만들 수 있고, 만든 재료가 계속 남아요.</li>
         <li>놀이를 하면 <b>치즈</b>를 받고, 치즈 20개로 스티커를 뽑아요. 스티커는 모두 48가지(일반·반짝·전설)예요.</li>
         <li>한글 놀이는 키의 <b>자리</b>를 읽어서 글자를 만들어요. 한/영 키가 영어로 되어 있어도 한글이 나와요.</li>
         <li>교실에서는 오른쪽 위 <b>소리</b> 버튼으로 효과음을 끌 수 있어요.</li>
@@ -1200,48 +1219,11 @@ const GAMES = [
     paint();
   } },
 
-/* ---- 10. drag: craft ---- */
-{ id: 'craft', town: 'move', title: '물건 만들기', skill: '끌어서 합치기', color: 'var(--orange)', r: -1.4,
-  desc: '재료를 끌어다 겹치면 새 물건이 뚝딱! 무엇을 만들 수 있을까요?',
-  how: ['오른쪽 재료를 <b>꾹</b> 눌러 작업대로 끌어 와요.', '재료 하나를 다른 재료 위에 <b>겹쳐 놓으면</b> 새 물건이 생겨요.', '새 물건 8개를 발견하면 성공! 발견할 때마다 치즈를 받아요.'],
-  run(c) {
-    const RECIPES = [['나무','불','숯','⚫'],['흙','물','진흙','🟫'],['진흙','불','그릇','🥣'],['나무','물','종이','📄'],['나무','숯','연필','✏️'],['종이','연필','그림','🖼️'],['종이','종이','공책','📒'],['공책','연필','일기장','📔'],['흙','불','벽돌','🧱'],['벽돌','벽돌','집','🏠'],['나무','나무','의자','🪑'],['물','불','김','♨️'],['김','그릇','밥','🍚'],['그릇','물','국','🍲'],['의자','의자','소파','🛋️'],['종이','물','종이배','⛵'],['연필','연필','젓가락','🥢'],['공책','공책','책','📚'],['집','집','마을','🏘️'],['밥','젓가락','식사','🍱']];
-    const R = {}; RECIPES.forEach(([a, b, n, e]) => R[[a, b].sort().join('+')] = [n, e]);
-    const known = new Map([['나무','🌳'],['물','💧'],['불','🔥'],['흙','🟤']]), GOAL = 8; let found = 0, finished = false;
-    const say = sayBox('재료 두 개를 <b>겹쳐</b> 보세요. 나무와 물을 합치면?'), craft = el('div', 'craft'), ws = el('div', 'ws', '<div class="tip">재료를 여기로 끌어 와서 서로 겹쳐 봐요</div>'), shelf = el('div', 'shelf');
-    const list = el('div', 'list'), clr = el('button', 'linkbtn', '작업대 치우기'); clr.type = 'button';
-    shelf.append(el('h3', '', '내 재료'), list, clr); craft.append(ws, shelf); c.body.append(say, craft);
-    const hud = () => c.hud(chip('✨', `발견 ${found} / ${RECIPES.length}`)); hud();
-    const mk = (n, e) => { const d = el('div', 'elem', `<i>${e}</i>${n}`); d.dataset.n = n; return d; };
-    const renderShelf = () => { list.innerHTML = ''; known.forEach((e, n) => { const d = mk(n, e); if (RECIPES.some(r => r[2] === n)) d.classList.add('fresh'); d.addEventListener('pointerdown', ev => { if (ev.button !== 0) return; drag(mk(n, e), ev, 30, 18); }); list.append(d); }); };
-    const center = d => { const r = d.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
-    const place = (d, x, y) => { const wr = ws.getBoundingClientRect(); d.classList.remove('flying'); d.style.left = Math.max(0, Math.min(wr.width - 90, x - wr.left)) + 'px'; d.style.top = Math.max(0, Math.min(wr.height - 44, y - wr.top)) + 'px'; ws.append(d); d.onpointerdown = ev => { if (ev.button !== 0) return; const r = d.getBoundingClientRect(); drag(d, ev, ev.clientX - r.left, ev.clientY - r.top); }; };
-    function drag(d, e, ox, oy) {
-      if (!c.alive) return; e.preventDefault(); d.classList.add('flying'); document.body.append(d);
-      const mv = ev => { d.style.left = (ev.clientX - ox) + 'px'; d.style.top = (ev.clientY - oy) + 'px'; }; mv(e);
-      const up = ev => {
-        window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up);
-        if (!c.alive) { d.remove(); return; }
-        const wr = ws.getBoundingClientRect();
-        if (ev.clientX < wr.left || ev.clientX > wr.right || ev.clientY < wr.top || ev.clientY > wr.bottom) { d.remove(); return; }
-        d.classList.remove('flying'); place(d, ev.clientX - ox, ev.clientY - oy);
-        const [cx, cy] = center(d);
-        const other = [...ws.querySelectorAll('.elem')].filter(o => o !== d).map(o => [o, Math.hypot(center(o)[0] - cx, center(o)[1] - cy)]).filter(p => p[1] < 55).sort((a, b) => a[1] - b[1])[0];
-        if (!other) { sfx.tick(); return; }
-        const o = other[0], res = R[[d.dataset.n, o.dataset.n].sort().join('+')];
-        if (!res) { sfx.bad(); o.classList.remove('nope'); void o.offsetWidth; o.classList.add('nope'); say.set(`음… <b>${d.dataset.n}</b>${hasJong(d.dataset.n) ? '과' : '와'} <b>${eun(o.dataset.n)}</b> 합쳐지지 않아요.`); return; }
-        const [n, em] = res, ol = parseFloat(o.style.left), ot = parseFloat(o.style.top); d.remove(); o.remove();
-        const nd = mk(n, em); nd.classList.add('born'); const wr2 = ws.getBoundingClientRect(); place(nd, wr2.left + ol, wr2.top + ot);
-        if (!known.has(n)) {
-          known.set(n, em); found++; hud(); renderShelf(); sfx.win(); addCheese(2, nd); say.set(`새로 발견! ${em} <b>${eul(n)}</b> 만들었어요. 🧀 +2`);
-          if (found >= GOAL && !finished) { finished = true; c.later(() => c.done(3, `새 물건 ${found}개를 발견했어요! 다시 하면 남은 ${RECIPES.length - found}개도 찾아봐요.`), 1500); }
-        } else { sfx.ok(); say.set(`${em} <b>${n}</b>! 전에 만든 물건이에요. 새 조합을 찾아봐요.`); }
-      };
-      window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
-    }
-    clr.addEventListener('click', () => { ws.querySelectorAll('.elem').forEach(e => e.remove()); sfx.tick(); });
-    renderShelf();
-  } },
+/* ---- 10. drag: infinite craft ---- */
+{ id: 'craft', town: 'move', title: '무엇이든 만들기', skill: '끌어서 합치기', color: 'var(--orange)', r: -1.4, isNew: true,
+  desc: '물·불·흙·바람에서 시작해서 합치고 또 합쳐요. 끝없이 새로운 것이 나와요!',
+  how: ['오른쪽 재료를 <b>꾹</b> 눌러 작업대로 끌어 와요.', '하나를 다른 것 위에 <b>겹쳐 놓으면</b> 새로운 것이 생겨요. 만든 것끼리 또 합칠 수 있어요!', '작업대의 물건을 <b>더블클릭</b>하면 하나 더 생기고, <b>오른쪽 클릭</b>하면 치워요.'],
+  run(c) { craftGame(c); } },
 
 /* ---- 11. click + math: shop ---- */
 { id: 'shop', town: 'move', title: '문방구 쇼핑', skill: '클릭 + 셈하기', color: 'var(--lime)', r: 0.9,
@@ -1734,6 +1716,347 @@ function journey(c, kind) {
   c.on(jr, 'scroll', onScroll);
   const startPos = () => { jr.scrollTop = up ? H : 0; onScroll(); };
   startPos(); paintGauge(); hud(); c.later(startPos, 30);
+}
+
+/* ================= infinite craft ================= */
+const CRAFT_TXT = `물+물=호수 🏞️
+불+불=태양 ☀️
+흙+흙=산 ⛰️
+바람+바람=회오리 🌪️
+물+불=김 ♨️
+물+흙=진흙 🟫
+물+바람=파도 🏄
+불+흙=용암 🟠
+불+바람=연기 💨
+흙+바람=먼지 🌫️
+호수+물=바다 🌊
+용암+물=돌 🗿
+용암+산=화산 🌋
+김+바람=구름 ☁️
+바람+구름=하늘 🌤️
+구름+물=비 🌧️
+비+태양=무지개 🌈
+구름+불=번개 ⚡
+비+흙=식물 🌱
+식물+흙=나무 🌳
+식물+태양=꽃 🌸
+식물+물=쌀 🌾
+식물+바람=밀 🌿
+나무+나무=숲 🌲
+나무+불=숯 ⚫
+돌+불=쇠 🔩
+진흙+불=벽돌 🧱
+진흙+태양=그릇 🥣
+벽돌+벽돌=집 🏠
+집+집=마을 🏘️
+마을+마을=도시 🏙️
+도시+도시=나라 🗺️
+나라+나라=지구 🌍
+지구+하늘=우주 🌌
+우주+돌=행성 🪐
+우주+불=별 ⭐
+지구+돌=달 🌕
+별+별=별자리 ✨
+별+바람=별똥별 🌠
+행성+용암=화성 🔴
+돌+바람=모래 🏖️
+돌+돌=길 🛣️
+모래+태양=사막 🏜️
+모래+불=유리 🔍
+구름+산=눈 ❄️
+눈+물=얼음 🧊
+눈+눈=눈사람 ⛄
+눈사람+태양=물 💧
+산+산=산맥 🏔️
+화산+바다=섬 🏝️
+섬+나무=야자수 🌴
+유리+모래=모래시계 ⏳
+유리+쇠=안경 👓
+쇠+나무=망치 🔨
+쇠+돌=도구 🧰
+쇠+쇠=가위 ✂️
+도구+나무=의자 🪑
+의자+의자=소파 🛋️
+돌+도구=바퀴 ⭕
+바퀴+바퀴=자전거 🚲
+바퀴+쇠=자동차 🚗
+바퀴+나무=킥보드 🛴
+자동차+자동차=버스 🚌
+버스+버스=기차 🚂
+자동차+하늘=비행기 ✈️
+비행기+우주=로켓 🚀
+자동차+불=소방차 🚒
+나무+바다=배 ⛵
+배+쇠=큰 배 🚢
+나무+물=종이 📄
+종이+종이=공책 📒
+종이+숯=연필 ✏️
+종이+나무=상자 📦
+종이+바람=종이비행기 🛩️
+종이+물=종이배 🛶
+연필+종이=그림 🖼️
+공책+연필=일기장 📔
+공책+공책=책 📚
+책+책=도서관 🏛️
+책+집=학교 🏫
+책+연필=글자 🔤
+나무+연필=자 📏
+그림+유리=카메라 📷
+그림+가위=퍼즐 🧩
+그림+나무=주사위 🎲
+연필+무지개=크레파스 🖍️
+무지개+그림=물감 🎨
+번개+바다=생명 🧬
+생명+진흙=사람 🧒
+사람+사람=가족 👨‍👩‍👧
+사람+꽃=사랑 💖
+사랑+종이=편지 💌
+생명+물=물고기 🐟
+생명+하늘=새 🐦
+생명+흙=벌레 🐛
+생명+숲=동물 🐾
+생명+우주=외계인 👽
+외계인+로켓=비행접시 🛸
+물고기+물고기=상어 🦈
+물고기+바다=고래 🐋
+새+새=알 🥚
+알+생명=병아리 🐣
+병아리+모래시계=닭 🐔
+알+불=달걀프라이 🍳
+벌레+꽃=벌 🐝
+벌+꽃=꿀 🍯
+꿀+불=사탕 🍬
+사탕+나무=막대사탕 🍭
+동물+집=강아지 🐶
+동물+숲=호랑이 🐯
+동물+사막=낙타 🐪
+동물+얼음=펭귄 🐧
+동물+식물=소 🐄
+동물+구름=양 🐑
+동물+화산=공룡 🦕
+공룡+불=용 🐉
+동물+무지개=유니콘 🦄
+소+사람=우유 🥛
+우유+모래시계=치즈 🧀
+우유+얼음=아이스크림 🍦
+동물+치즈=생쥐 🐁
+양+도구=실 🧶
+실+실=천 🧵
+천+사람=옷 👕
+옷+옷=옷장 🚪
+옷+길=신발 👟
+천+신발=양말 🧦
+옷+태양=모자 🧢
+천+비=우산 ☂️
+천+눈=장갑 🧤
+천+천=이불 🛌
+이불+나무=침대 🛏️
+천+책=가방 🎒
+천+동물=곰 인형 🧸
+천+산=텐트 ⛺
+텐트+불=캠핑 🏕️
+바람+천=풍선 🎈
+신발+풍선=축구공 ⚽
+천+상자=선물 🎁
+선물+사람=산타 🎅
+나무+별=크리스마스트리 🎄
+돌+태양=금 🟡
+금+모자=왕관 👑
+금+돌=보석 💎
+금+보석=반지 💍
+금+종이=돈 💰
+금+실=메달 🏅
+왕관+사람=왕 🤴
+왕+집=성 🏰
+번개+쇠=전기 🔌
+전기+유리=전구 💡
+전기+책=컴퓨터 💻
+전기+그림=텔레비전 📺
+바람+쇠=소리 🔔
+전기+소리=전화기 ☎️
+전화기+컴퓨터=스마트폰 📱
+컴퓨터+글자=키보드 ⌨️
+생쥐+컴퓨터=마우스 🖱️
+마우스+치즈=찍찍이 🐭
+컴퓨터+주사위=게임 🎮
+사람+쇠=로봇 🤖
+소리+나무=기타 🎸
+소리+쇠=트럼펫 🎺
+소리+소리=노래 🎵
+노래+사람=가수 🎤
+노래+의자=피아노 🎹
+소리+천=북 🥁
+모래시계+전기=시계 ⏰
+시계+옷=손목시계 ⌚
+그릇+물=물컵 🥤
+그릇+김=차 ☕
+쇠+그릇=냄비 🍲
+냄비+물=라면 🍜
+쌀+김=밥 🍚
+밥+바다=김밥 🍙
+쇠+밥=숟가락 🥄
+숟가락+쇠=포크 🍴
+나무+밥=젓가락 🥢
+밀+불=빵 🍞
+빵+치즈=피자 🍕
+빵+소=햄버거 🍔
+빵+꿀=도넛 🍩
+빵+우유=케이크 🍰
+케이크+불=생일 파티 🎉
+나무+꽃=사과 🍎
+사과+빵=파이 🥧
+밀+태양=옥수수 🌽
+옥수수+불=팝콘 🍿
+꽃+물=비누 🧼
+비누+물=거품 💭
+식물+사람=약 💊
+약+집=병원 🏥
+유리+별=망원경 🔭
+유리+벌레=현미경 🔬
+쇠+지구=나침반 🧭
+길+전기=신호등 🚦
+길+호수=다리 🌉
+바퀴+하늘=대관람차 🎡
+기차+대관람차=롤러코스터 🎢
+대관람차+노래=놀이공원 🎪
+집+돈=가게 🏪
+가게+연필=문방구 🏬
+사람+연기=유령 👻
+별+사람=마법사 🧙
+달+사람=잠 😴
+잠+이불=꿈 💤
+로켓+달=우주비행사 👨‍🚀
+사람+물=수영 🏊
+가족+집=우리 집 🏡
+학교+사람=친구 👫
+금+물컵=트로피 🏆`;
+const CR = (() => {
+  const R = {}, E = { '물': '💧', '불': '🔥', '흙': '🟤', '바람': '🌬️' };
+  CRAFT_TXT.trim().split('\n').forEach(l => { const m = l.trim().match(/^(.+?)\+(.+?)=(.+) (\S+)$/); if (!m) return; R[[m[1], m[2]].sort().join('+')] = m[3]; E[m[3]] = m[4]; });
+  return { R, E, LIST: Object.entries(R).map(([k, v]) => [...k.split('+'), v]) };
+})();
+const CBASE = ['물', '불', '흙', '바람'];
+const CMISSIONS = ['무지개', '집', '연필', '우산', '로봇', '로켓', '컴퓨터', '김밥', '유니콘', '공룡', '왕관', '찍찍이'];
+function craftGame(c) {
+  const CD = DATA.craft || (DATA.craft = { known: [], missions: {} });
+  if (!CD.known.length) CBASE.forEach(n => CD.known.push({ n, e: [CR.E[n]] }));
+  const get = n => CD.known.find(k => k.n === n);
+  const emOf = n => { const k = get(n); return k ? k.e[k.e.length - 1] : CR.E[n] || '❔'; };
+  const REAL = Object.keys(CR.E).length;
+  let newReal = 0, newInv = 0, invCheese = 0, tab = 'all', abc = false;
+  const say = sayBox('재료 두 개를 <b>겹쳐</b> 보세요. 물과 불을 합치면 뭐가 될까요?');
+  const tools = el('div', 'ctools', `<button type="button" class="cbtn" data-a="hint">💡 힌트 보기</button><button type="button" class="cbtn" data-a="clear">🧹 작업대 치우기</button><button type="button" class="cbtn" data-a="end">⭐ 오늘 탐험 끝내기</button>`);
+  const craft = el('div', 'craft'), ws = el('div', 'ws', '<div class="tip">끌어서 겹치기 · 더블클릭하면 하나 더 · 오른쪽 클릭하면 치우기</div>');
+  const side = el('div', 'shelf'), mis = el('div', 'missions'), tabs = el('div', 'ctabs'), list = el('div', 'list');
+  side.append(el('h3', '', '도전! 만들어 볼까?'), mis, el('h3', '', '내 재료'), tabs, list);
+  craft.append(ws, side); c.body.append(say, tools, craft);
+  const counts = () => { const inv = CD.known.filter(k => k.inv).length; return [CD.known.length - inv, inv]; };
+  const hud = () => { const [r, i] = counts(); c.hud(chip('🧪', `진짜 물건 ${r} / ${REAL}`) + chip('💡', `발명품 ${i}`) + chip('✨', `오늘 ${newReal + newInv}개`)); };
+  const renderMissions = () => {
+    mis.innerHTML = CMISSIONS.map(n => CD.missions[n] ? `<span class="ms done">${CR.E[n]} ${n}</span>` : `<button type="button" class="ms" data-n="${n}">❓ ${n}</button>`).join('');
+  };
+  const renderTabs = () => { tabs.innerHTML = [['all', '전체'], ['real', '진짜 물건'], ['inv', '발명품']].map(([k, l]) => `<button type="button" class="ctab${tab === k ? ' on' : ''}" data-t="${k}">${l}</button>`).join('') + `<button type="button" class="ctab" data-t="sort">${abc ? '가나다순' : '만든 순'}</button>`; };
+  const mk = k => { const d = el('div', 'elem' + (k.inv ? ' inv' : ''), `<i>${k.e.join('')}</i>${k.n}`); d.dataset.n = k.n; return d; };
+  const renderShelf = () => {
+    let ks = CD.known.filter(k => tab === 'all' || (tab === 'inv' ? k.inv : !k.inv));
+    if (abc) ks = ks.slice().sort((a, b) => a.n.localeCompare(b.n, 'ko')); else ks = ks.slice().reverse();
+    list.innerHTML = '';
+    ks.forEach(k => { const d = mk(k); d.addEventListener('pointerdown', ev => { if (ev.button !== 0) return; drag(mk(k), ev, 30, 18, true); }); list.append(d); });
+    if (!ks.length) list.innerHTML = '<p style="font-size:14px;color:var(--ink2)">아직 없어요. 합쳐 봐요!</p>';
+    hud();
+  };
+  const center = d => { const r = d.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; };
+  const place = (d, x, y) => {
+    const wr = ws.getBoundingClientRect(); d.classList.remove('flying');
+    d.style.left = Math.max(0, Math.min(wr.width - 100, x - wr.left)) + 'px'; d.style.top = Math.max(0, Math.min(wr.height - 44, y - wr.top)) + 'px'; ws.append(d);
+    d.onpointerdown = ev => { if (ev.button !== 0) return; const r = d.getBoundingClientRect(); drag(d, ev, ev.clientX - r.left, ev.clientY - r.top, false); };
+    d.oncontextmenu = ev => { ev.preventDefault(); d.remove(); sfx.tick(); };
+  };
+  const pop = (k, kind) => {
+    ws.querySelector('.discover')?.remove();
+    const b = el('div', 'discover', `<small>${kind}</small><i>${k.e.join('')}</i><b>${k.n}</b>`); ws.append(b); setTimeout(() => b.remove(), 1900);
+  };
+  const invent = (a, b) => {
+    if (a === b) {
+      const P = ['왕', '슈퍼', '우주 최강'], pi = P.findIndex(p => b.startsWith(p + ' '));
+      if (pi < 0) return '왕 ' + b; if (pi < P.length - 1) return P[pi + 1] + ' ' + b.slice(P[pi].length + 1); return b.slice(P[pi].length + 1) + ' 탑';
+    }
+    const wa = a.replace(/^(왕|슈퍼|우주 최강) /, '').split(' '); let mod = wa[wa.length - 1];
+    let tw = b.split(' '); if (tw.length >= 3) tw = tw.slice(-2);
+    if (tw.includes(mod)) mod = wa[0];
+    if (tw.includes(mod)) return '반짝 ' + tw.join(' ');
+    return mod + ' ' + tw.join(' ');
+  };
+  function combine(d, o) {
+    const a = d.dataset.n, b = o.dataset.n; let n = CR.R[[a, b].sort().join('+')], inv = false, e;
+    if (n) e = [CR.E[n]]; else { inv = true; n = invent(a, b); e = a === b ? [emOf(b)] : [emOf(a), emOf(b)]; if (e[0] === e[1]) e = [e[0]]; }
+    const ol = parseFloat(o.style.left), ot = parseFloat(o.style.top); d.remove(); o.remove();
+    let k = get(n); const isNew = !k;
+    if (isNew) { k = { n, e, inv: inv ? 1 : 0 }; CD.known.push(k); if (inv) { const invs = CD.known.filter(x => x.inv); if (invs.length > 400) CD.known.splice(CD.known.indexOf(invs[0]), 1); } }
+    const nd = mk(k); nd.classList.add('born'); const wr = ws.getBoundingClientRect(); place(nd, wr.left + ol, wr.top + ot);
+    if (!isNew) { sfx.ok(); say.set(`${k.e.join('')} <b>${k.n}</b>! 전에 만든 거예요. 다른 것과도 합쳐 봐요.`); return; }
+    if (!inv) {
+      newReal++; sfx.win(); addCheese(2, nd); pop(k, '처음 발견!');
+      say.set(`처음 발견! ${k.e.join('')} <b>${eul(n)}</b> 만들었어요. 🧀 +2`);
+      if (CMISSIONS.includes(n) && !CD.missions[n]) { CD.missions[n] = 1; setTimeout(() => { addCheese(5, nd); toast(`도전 성공! ${CR.E[n]} ${n} 🧀 +5`); sfx.fanfare(); }, 900); renderMissions(); }
+    } else {
+      newInv++; sfx.pop(); pop(k, '새 발명품!');
+      if (invCheese < 10) { invCheese++; addCheese(1, nd); }
+      say.set(`짜잔! 세상에 없던 ${k.e.join('')} <b>${eul(n)}</b> 발명했어요!`);
+    }
+    persist(); renderShelf();
+  }
+  function drag(d, e, ox, oy, fromShelf) {
+    if (!c.alive) return; e.preventDefault(); const sx = e.clientX, sy = e.clientY;
+    const wsHome = !fromShelf ? [parseFloat(d.style.left), parseFloat(d.style.top)] : null;
+    d.classList.add('flying'); document.body.append(d);
+    const mv = ev => { d.style.left = (ev.clientX - ox) + 'px'; d.style.top = (ev.clientY - oy) + 'px'; }; mv(e);
+    const up = ev => {
+      window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up);
+      if (!c.alive) { d.remove(); return; }
+      const wr = ws.getBoundingClientRect(), moved = Math.hypot(ev.clientX - sx, ev.clientY - sy);
+      if (ev.clientX < wr.left || ev.clientX > wr.right || ev.clientY < wr.top || ev.clientY > wr.bottom) {
+        if (fromShelf || moved > 6) { d.remove(); return; }
+      }
+      place(d, ev.clientX - ox, ev.clientY - oy);
+      if (!fromShelf && moved < 6) {           // a click, not a drag: double click makes a copy
+        const now = performance.now();
+        if (d._last && now - d._last < 420) { d._last = 0; const k = get(d.dataset.n); if (k) { const cp = mk(k); cp.classList.add('born'); place(cp, wr.left + wsHome[0] + 24, wr.top + wsHome[1] + 30); sfx.pop(); } }
+        else d._last = now;
+        return;
+      }
+      ws.querySelector('.tip')?.remove();
+      const [cx, cy] = center(d);
+      const other = [...ws.querySelectorAll('.elem')].filter(o => o !== d).map(o => [o, Math.hypot(center(o)[0] - cx, center(o)[1] - cy)]).filter(p => p[1] < 50).sort((a, b) => a[1] - b[1])[0];
+      if (other) combine(d, other[0]); else sfx.tick();
+    };
+    window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+  }
+  const hint = (target) => {
+    const known = new Set(CD.known.map(k => k.n));
+    if (target) {
+      const r = CR.LIST.find(x => x[2] === target); if (!r) return;
+      const show = n => known.has(n) ? `${CR.E[n]} <b>${n}</b>` : `<b>❓ ???</b>`;
+      say.set(`${target} 만드는 법: ${show(r[0])} + ${show(r[1])}${known.has(r[0]) && known.has(r[1]) ? ' 을 합쳐 봐요!' : ' (❓도 먼저 만들어야 해요)'}`); return;
+    }
+    const cand = CR.LIST.filter(([a, b, n]) => known.has(a) && known.has(b) && !known.has(n));
+    if (!cand.length) { say.set('진짜 물건을 모두 찾았어요! 이제 마음껏 <b>발명품</b>을 만들어 봐요.'); return; }
+    const [a, b] = pick(cand); say.set(`힌트: ${CR.E[a]} <b>${a}</b> + ${CR.E[b]} <b>${b}</b> 을 합치면 새로운 게 나와요!`);
+  };
+  tools.addEventListener('click', e => {
+    const b = e.target.closest('.cbtn'); if (!b || !c.alive) return; b.blur();
+    if (b.dataset.a === 'hint') { hint(); sfx.tick(); }
+    if (b.dataset.a === 'clear') { ws.querySelectorAll('.elem').forEach(x => x.remove()); sfx.tick(); }
+    if (b.dataset.a === 'end') {
+      const n = newReal + newInv;
+      if (n < 3) { say.set(`새로운 걸 <b>3개</b> 이상 만들면 별을 받을 수 있어요. (지금 ${n}개)`); sfx.bad(); return; }
+      c.done(n >= 15 ? 3 : n >= 7 ? 2 : 1, `오늘 진짜 물건 ${newReal}개, 발명품 ${newInv}개를 새로 만들었어요! 다음에 와도 재료가 그대로 남아 있어요.`);
+    }
+  });
+  mis.addEventListener('click', e => { const b = e.target.closest('.ms[data-n]'); if (b) hint(b.dataset.n); });
+  tabs.addEventListener('click', e => { const b = e.target.closest('.ctab'); if (!b) return; if (b.dataset.t === 'sort') abc = !abc; else tab = b.dataset.t; renderTabs(); renderShelf(); });
+  renderMissions(); renderTabs(); renderShelf();
+  c.later(() => { const wr = ws.getBoundingClientRect(); CBASE.forEach((n, i) => place(mk(get(n)), wr.left + 30 + (i % 2) * 140, wr.top + 30 + Math.floor(i / 2) * 80)); }, 30);
 }
 
 /* ================= shell ================= */
